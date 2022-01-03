@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/exec"
 )
 
 func main() {
-
 	var url string
 	var method string
 	var option string
@@ -42,6 +43,10 @@ func main() {
 	fmt.Scan(&option)
 	if ynToBool(option) {
 		fmt.Println("Sending request")
+		cmd := exec.Command("curl", "-X", method, url)
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Run()
 	} else {
 		fmt.Println("Do you want to save request to file? [y/n]")
 		fmt.Scan(&option)
