@@ -3,6 +3,9 @@ package controllers
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
+	"os"
+	"os/exec"
 )
 
 func URLmethod() []string {
@@ -53,6 +56,14 @@ func GetHeader() []string {
 	args = append(args, header)
 
 	return args
+}
+
+func SendRequest(args []string) {
+	cmd := exec.Command("curl", args...)
+	log.Println("curl ", args)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Run()
 }
 
 func loadFile(path string) string {

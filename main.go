@@ -3,9 +3,6 @@ package main
 import (
 	"fmt"
 	"http-request-creator/controllers"
-	"log"
-	"os"
-	"os/exec"
 )
 
 func main() {
@@ -34,7 +31,7 @@ func main() {
 	fmt.Scan(&option)
 	if ynToBool(option) {
 		fmt.Println("Sending request")
-		sendRequest(args)
+		controllers.SendRequest(args)
 	} else {
 		fmt.Println("Do you want to save request to file? [y/n]")
 		fmt.Scan(&option)
@@ -53,12 +50,4 @@ func ynToBool(option string) bool {
 	} else {
 		return false
 	}
-}
-
-func sendRequest(args []string) {
-	cmd := exec.Command("curl", args...)
-	log.Println("curl ", args)
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Run()
 }
