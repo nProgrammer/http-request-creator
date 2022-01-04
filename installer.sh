@@ -8,5 +8,5 @@ mv http-request-creator request-creator
 
 mv request-creator $HOME/.http-request-creator/bin
 
-echo "Now add to the .bashrc or .zshrc command: export PATH=\$PATH:\$HOME/.http-request-creator-bin"
-echo "To use http-request-creator use command: request-creator"
+echo "Now add to the .bashrc or .zshrc command: export PATH=\$PATH:\$HOME/.http-request-creator-bin" #FIXME - check grammar
+echo "To use http-request-creator use command: request-creator" #FIXME - check grammar
