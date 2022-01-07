@@ -6,15 +6,11 @@ package main
 import (
 	"fmt"
 	"http-request-creator/controllers"
-	"log"
-	"os"
-	"strings"
 )
 
 func main() {
 	var args []string
 	var option string
-	var path string
 
 	fmt.Println("Starting HTTP request creator")
 	args = append(args, controllers.URLmethod()...)
@@ -43,16 +39,7 @@ func main() {
 		fmt.Println("Do you want to save request to file? [y/n]")
 		fmt.Scan(&option)
 		if ynToBool(option) {
-			fmt.Println("Path to directory where do you want to save request: ")
-			//! CREATING FILE IN PATH, SAVING REQUEST
-			fmt.Scan(&path)
-			arguments := strings.Join(args, " ")
-			request := "curl " + arguments
-			log.Println(request)
-			requestB := []byte(request)
-			file := path + "request.txt"
-			err := os.WriteFile(file, requestB, 0664)
-			controllers.CheckErr(err)
+			controllers.SaveRequest(args)
 		} else {
 			fmt.Println("Closing CLI app")
 		}

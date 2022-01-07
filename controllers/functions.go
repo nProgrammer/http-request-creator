@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func URLmethod() []string {
@@ -66,13 +67,28 @@ func SendRequest(args []string) {
 	cmd.Run()
 }
 
+func SaveRequest(args []string) {
+	var path string
+
+	fmt.Println("Path to directory where do you want to save request: ")
+	//! CREATING FILE IN PATH, SAVING REQUEST
+	fmt.Scan(&path)
+	arguments := strings.Join(args, " ")
+	request := "curl " + arguments
+	log.Println(request)
+	requestB := []byte(request)
+	file := path + "request.txt"
+	err := os.WriteFile(file, requestB, 0664)
+	checkErr(err)
+}
+
 func loadFile(path string) string {
 	b, err := ioutil.ReadFile(path)
-	CheckErr(err)
+	checkErr(err)
 	return string(b)
 }
 
-func CheckErr(err error) {
+func checkErr(err error) {
 	if err != nil {
 		panic(err)
 	}
