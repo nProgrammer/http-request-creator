@@ -59,12 +59,12 @@ func GetHeader() []string {
 	return args
 }
 
-func SendRequest(args []string) string {
+func SendRequest(args []string) []byte {
 	cmd := exec.Command("curl", args...)
 	log.Println("curl ", args)
 	data, err := cmd.Output()
 	checkErr(err)
-	return string(data)
+	return data
 }
 
 func SaveRequest(args []string) {
@@ -79,6 +79,17 @@ func SaveRequest(args []string) {
 	file := path + "request.txt"
 	err := os.WriteFile(file, requestB, 0664) //* Writing file
 	checkErr(err)
+}
+
+func SaveResult(result []byte) {
+	var option string
+
+	fmt.Println("Do you want to save result of the request to file? [y/n]")
+	fmt.Scan(&option)
+	if option == "y" {
+		err := os.WriteFile("./result.txt", result, 0664) //* Writing file
+		checkErr(err)
+	}
 }
 
 func loadFile(path string) string {

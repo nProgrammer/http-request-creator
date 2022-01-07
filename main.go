@@ -36,7 +36,8 @@ func main() {
 	if ynToBool(option) {
 		fmt.Println("Sending request")
 		result := controllers.SendRequest(args) //* Sending request via curl
-		color.Green(result)
+		color.Green(string(result))
+		controllers.SaveResult(result)
 	} else {
 		fmt.Println("Do you want to save request to file? [y/n]")
 		fmt.Scan(&option)
