@@ -16,10 +16,10 @@ func URLmethod() []string {
 
 	fmt.Println("HTTP request URL: ")
 	fmt.Scan(&url)
-	args = append(args, url)
+	args = append(args, url) //* Appending URL to the slice
 	fmt.Println("What HTTP method do you want to use: ")
 	fmt.Scan(&method)
-	args = append(args, "-X")
+	args = append(args, "-X") //* Appending http method flag to the slice the curl
 	args = append(args, method)
 
 	return args
@@ -41,8 +41,8 @@ func GetBody(option string) []string {
 		fmt.Scan(&path)
 		body = loadFile(path)
 	}
-	args = append(args, "--body")
-	args = append(args, body)
+	args = append(args, "--body") //* Appending curl body flag to the slice
+	args = append(args, body)     //* Appending body to the slice
 
 	return args
 }
@@ -53,8 +53,8 @@ func GetHeader() []string {
 
 	fmt.Println("Header: ")
 	fmt.Scan(&header)
-	args = append(args, "--header")
-	args = append(args, header)
+	args = append(args, "--header") //* Appending curl header flag to the slice
+	args = append(args, header)     //* Appending header to the slice
 
 	return args
 }
@@ -71,14 +71,13 @@ func SaveRequest(args []string) {
 	var path string
 
 	fmt.Println("Path to directory where do you want to save request: ")
-	//! CREATING FILE IN PATH, SAVING REQUEST
 	fmt.Scan(&path)
 	arguments := strings.Join(args, " ")
 	request := "curl " + arguments
 	log.Println(request)
-	requestB := []byte(request)
+	requestB := []byte(request) //* Converting request from string to byte code
 	file := path + "request.txt"
-	err := os.WriteFile(file, requestB, 0664)
+	err := os.WriteFile(file, requestB, 0664) //* Writing file
 	checkErr(err)
 }
 
