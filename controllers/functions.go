@@ -19,7 +19,7 @@ func URLmethod() []string {
 	fmt.Println("What HTTP method do you want to use: ")
 	fmt.Scan(&method)
 	args = append(args, "-X")
-	args = append(args, url)
+	args = append(args, method)
 
 	return args
 }
@@ -68,11 +68,11 @@ func SendRequest(args []string) {
 
 func loadFile(path string) string {
 	b, err := ioutil.ReadFile(path)
-	checkErr(err)
+	CheckErr(err)
 	return string(b)
 }
 
-func checkErr(err error) {
+func CheckErr(err error) {
 	if err != nil {
 		panic(err)
 	}
