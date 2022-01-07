@@ -59,12 +59,12 @@ func GetHeader() []string {
 	return args
 }
 
-func SendRequest(args []string) {
+func SendRequest(args []string) string {
 	cmd := exec.Command("curl", args...)
 	log.Println("curl ", args)
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Run()
+	data, err := cmd.Output()
+	checkErr(err)
+	return string(data)
 }
 
 func SaveRequest(args []string) {

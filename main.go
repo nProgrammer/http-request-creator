@@ -5,6 +5,8 @@ package main
 import (
 	"fmt"
 	"http-request-creator/controllers"
+
+	"github.com/fatih/color"
 )
 
 func main() {
@@ -33,7 +35,8 @@ func main() {
 	fmt.Scan(&option)
 	if ynToBool(option) {
 		fmt.Println("Sending request")
-		controllers.SendRequest(args) //* Sending request via curl
+		result := controllers.SendRequest(args) //* Sending request via curl
+		color.Green(result)
 	} else {
 		fmt.Println("Do you want to save request to file? [y/n]")
 		fmt.Scan(&option)
