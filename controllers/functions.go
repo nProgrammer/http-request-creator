@@ -41,7 +41,7 @@ func GetBody(option string) []string {
 		fmt.Scan(&path)
 		body = loadFile(path)
 	}
-	args = append(args, "--body") //* Appending curl body flag to the slice
+	args = append(args, "--data") //* Appending curl body flag to the slice
 	args = append(args, body)     //* Appending body to the slice
 
 	return args
